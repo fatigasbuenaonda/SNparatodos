@@ -1,0 +1,2 @@
+# SNparatodos
+Fullstack app propia
