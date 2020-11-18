@@ -1,0 +1,112 @@
+<div class="jumbotron">
+    <h2>HELLO</h2>
+    <hr>
+
+    <button class="btn btn-success my-3" (click)="onLogout()">Logout</button>
+
+    <!-- <h4><u>Reactive Forms</u></h4> -->
+    <br>
+    <form [formGroup]="f" autocomplete="off">
+
+
+        <!--CAMPO ID-->
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="number" id="id" class="form-control" formControlName="id">
+
+            <!--CARTELES DE VALIDACIÓN-->
+            <div *ngIf="f.controls.id.errors && f.controls.id.dirty" class="alert alert-danger mt-1">
+                Campo no válido
+            </div>
+
+        </div>
+
+        <!--CAMPO PICTURE-->
+        <div class="form-group">
+            <label for="picture">FOTO</label>
+            <input type="text" id="picture" class="form-control" formControlName="picture">
+            <!-- <input type="file" id="picture" class="form-control" formControlName="picture" (change)="onFileSelected($event)"> -->
+
+        </div>
+
+        <!--CAMPO TITLE-->
+        <div class="form-group">
+            <label for="title">TÍTULO</label>
+            <input type="text" id="title" class="form-control" formControlName="title">
+
+            <!--CARTELES DE VALIDACIÓN-->
+            <div *ngIf="f.controls.title.errors && f.controls.title.dirty" class="alert alert-danger mt-1">
+                Campo no válido
+            </div>
+
+        </div>
+
+        <!--CAMPO TEXT-->
+        <div class="form-group">
+            <label for="text">TEXTO</label>
+            <input type="text" id="text" class="form-control" formControlName="text">
+
+            <!--CARTELES DE VALIDACIÓN-->
+            <div *ngIf="f.controls.text.errors && f.controls.text.dirty" class="alert alert-danger mt-1">
+                Campo no válido
+            </div>
+
+        </div>
+
+        <button class="btn btn-success my-3" [disabled]="f.invalid" (click)="enviarNews()">Postear News</button>
+        <button class="btn btn-warning my-3" [disabled]="f.invalid" (click)="enviarInterviews()">Postear Interviews</button>
+        <button class="btn btn-danger my-3" (click)="borrarNews()">Borrar News</button>
+        <button class="btn btn-danger my-3" (click)="borrarInterviews()">Borrar Interviews</button>
+
+    </form>
+
+    <hr>
+    <h5>Datos del Reactive Form</h5>
+    <pre><p>{{ f.value | json }}</p></pre>
+
+
+    <hr>
+    <hr>
+    <h2>NEWS</h2>
+    <table>
+        <tr *ngFor="let item of news">
+            <td>
+                {{item.id}} {{item.picture}} {{item.title}} {{item.text}}
+            </td>
+        </tr>
+    </table>
+
+    <h2>INTERVIEWS</h2>
+    <table>
+        <tr *ngFor="let item of interviews">
+            <td>
+                {{item.id}} {{item.picture}} {{item.title}} {{item.text}}
+            </td>
+        </tr>
+    </table>
+
+    <h2>USERS</h2>
+    <table>
+        <tr *ngFor="let item of users">
+            <td>
+                {{item.id}} {{item.username}} {{item.password}}
+            </td>
+        </tr>
+    </table>
+
+    <br><br><br>
+
+    <!-- Acá quiero mostrar lo que se va a mostrar en la WEB, (la info que está subida en la base de datos) -->
+
+    <div class="media alert alert-info" *ngFor="let n of news; index as i">
+        <!-- <img src="" width="250" [ngStyle]="{'border-radius':'15px'}" alt=""> -->
+        <div class="media-body ml-3"></div>
+        <h5><u>Título: {{i+1}} - ID: {{n.id}} - {{n.title}}</u></h5>
+        <br>
+        <p>Texto: <b>{{n.text}}</b></p>
+        <p>Texto: <i>{{n.text}}</i></p>
+    </div>
+
+</div>
+
+<!--  ###########################################################################################    -->
